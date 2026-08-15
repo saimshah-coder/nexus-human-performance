@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact NEXUS about membership, classes and performance training.">
+    <meta name="theme-color" content="#050505">
+    <title>NEXUS — Contact</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+<style>
+    .page-shell {
+        min-height: 100vh;
+        padding: 150px 0 100px;
+    }
+
+    .page-hero {
+        max-width: 900px;
+        margin-bottom: 70px;
+    }
+
+    .page-hero h1 {
+        margin: 15px 0 22px;
+        color: var(--white);
+        font-size: clamp(3.4rem, 8vw, 7rem);
+        line-height: .9;
+        letter-spacing: -.065em;
+    }
+
+    .page-hero h1 span {
+        color: var(--lime);
+    }
+
+    .page-hero p {
+        max-width: 720px;
+        color: var(--muted);
+        line-height: 1.85;
+    }
+
+    .page-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    .page-card {
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: linear-gradient(145deg, #101310, #080a08);
+    }
+
+    .page-card.wide {
+        grid-column: 1 / -1;
+    }
+
+    .page-card h2,
+    .page-card h3 {
+        color: var(--white);
+        margin-bottom: 12px;
+        letter-spacing: -.03em;
+    }
+
+    .page-card p,
+    .page-card li {
+        color: var(--muted);
+        line-height: 1.85;
+    }
+
+    .page-card ul {
+        padding-left: 20px;
+        margin-top: 12px;
+    }
+
+    .page-stat {
+        margin-top: 18px;
+        color: var(--lime);
+        font: 10px var(--font-mono);
+        letter-spacing: .12em;
+        text-transform: uppercase;
+    }
+
+    .contact-form {
+        display: grid;
+        gap: 16px;
+        margin-top: 18px;
+    }
+
+    .contact-form label {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+        font: 9px var(--font-mono);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+        width: 100%;
+        padding: 14px;
+        outline: none;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: #090b09;
+        color: var(--white);
+    }
+
+    .contact-form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+        border-color: rgba(201,255,53,.5);
+    }
+
+    .contact-note {
+        margin-top: 14px;
+        color: var(--muted-dark);
+        font-size: 11px;
+        line-height: 1.7;
+    }
+
+    .legal-content {
+        display: grid;
+        gap: 22px;
+    }
+
+    .legal-content .page-card h2 {
+        margin-bottom: 15px;
+    }
+
+    .legal-date {
+        margin-top: 8px;
+        color: var(--muted-dark);
+        font: 10px var(--font-mono);
+        letter-spacing: .08em;
+    }
+
+    @media (max-width: 760px) {
+        .page-shell {
+            padding: 115px 0 70px;
+        }
+
+        .page-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .page-card.wide {
+            grid-column: auto;
+        }
+
+        .page-card {
+            padding: 24px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <div class="noise"></div>
+
+    <header class="site-header">
+        <nav class="navbar container">
+            <a href="../index.html" class="brand magnetic">
+                <span class="brand-symbol"><span></span></span>
+                <span>NEXUS</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="../index.html#system">SYSTEM</a>
+                <a href="../index.html#experience">EXPERIENCE</a>
+                <a href="ai-coach.html">AI COACH</a>
+                <a href="../index.html#classes">CLASSES</a>
+                <a href="../index.html#membership">MEMBERSHIP</a>
+            </div>
+
+            <div class="nav-right">
+                <a href="contact.html" class="button button-primary magnetic">CONTACT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <div class="container">
+            
+<section class="page-hero">
+    <span class="section-number">NEXUS // CONTACT</span>
+    <h1>START A <span>CONVERSATION.</span></h1>
+    <p>
+        Have a question about membership, classes, the AI Coach or the NEXUS
+        experience? Send us a message and tell us what you need.
+    </p>
+</section>
+
+<section class="page-grid">
+    <article class="page-card">
+        <span class="section-number">01 / CONTACT FORM</span>
+        <h2>Send an inquiry.</h2>
+
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks. Your message is ready for a backend connection.');">
+            <label>
+                Full name
+                <input type="text" name="name" placeholder="Your name" required>
+            </label>
+
+            <label>
+                Email
+                <input type="email" name="email" placeholder="you@example.com" required>
+            </label>
+
+            <label>
+                Topic
+                <select name="topic" required>
+                    <option value="">Select topic</option>
+                    <option>Membership</option>
+                    <option>Classes</option>
+                    <option>AI Coach</option>
+                    <option>General question</option>
+                </select>
+            </label>
+
+            <label>
+                Message
+                <textarea name="message" placeholder="Tell us how we can help." required></textarea>
+            </label>
+
+            <button class="button button-primary" type="submit">SEND MESSAGE →</button>
+        </form>
+
+        <p class="contact-note">
+            Note: this front-end form is currently a demo and does not send
+            messages to a server until you connect a backend or form service.
+        </p>
+    </article>
+
+    <aside class="page-card">
+        <span class="section-number">02 / QUICK LINKS</span>
+        <h2>Explore NEXUS.</h2>
+        <ul>
+            <li><a href="../index.html#membership">View membership options</a></li>
+            <li><a href="../index.html#classes">See live classes</a></li>
+            <li><a href="ai-coach.html">Build a training protocol</a></li>
+            <li><a href="about.html">Learn about NEXUS</a></li>
+            <li><a href="privacy.html">Read our privacy policy</a></li>
+        </ul>
+        <div class="page-stat">RESPONDING TO THE NEXT MOVE</div>
+    </aside>
+
+    <article class="page-card wide">
+        <span class="section-number">03 / BEFORE YOU WRITE</span>
+        <h2>For a faster response, include the details.</h2>
+        <p>
+            Tell us what you are trying to achieve, what membership or class
+            you are interested in, and any timing constraints. Clear questions
+            help us give you a clear next step.
+        </p>
+    </article>
+</section>
+<article class="page-card">
+    <span class="section-number">02 / CONTACT DETAILS</span>
+
+    <h2>Reach NEXUS.</h2>
+
+    <p>
+        <strong style="color: var(--white);">Email:</strong><br>
+        <a
+            href="mailto:Nexusgym4@gmail.com"
+            style="color: var(--lime);"
+        >
+            Nexusgym4@gmail.com
+        </a>
+    </p>
+
+    <p style="margin-top: 22px;">
+        <strong style="color: var(--white);">Location:</strong><br>
+        F-9 Markaz, Islamabad, Pakistan
+    </p>
+
+    <div class="page-stat">NEXUS // ISLAMABAD</div>
+</article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>© 2030 NEXUS HUMAN PERFORMANCE LAB</span>
+            <div>
+                <a href="about.html">ABOUT</a>
+                <a href="contact.html">CONTACT</a>
+                <a href="privacy.html">PRIVACY</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

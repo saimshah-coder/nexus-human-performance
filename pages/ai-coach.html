@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="NEXUS AI Coach — build a personalized training protocol."
+    >
+
+    <meta name="theme-color" content="#050505">
+
+    <title>NEXUS AI Coach — Human Performance Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        .coach-page {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(201, 255, 53, .08), transparent 32rem),
+                radial-gradient(circle at 85% 35%, rgba(53, 245, 255, .05), transparent 28rem),
+                var(--bg);
+        }
+
+        .coach-shell {
+            width: min(calc(100% - 40px), var(--container));
+            margin-inline: auto;
+            padding: 150px 0 100px;
+        }
+
+        .coach-hero {
+            max-width: 900px;
+            margin-bottom: 55px;
+        }
+
+        .coach-hero .eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            color: var(--lime);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: .16em;
+        }
+
+        .coach-hero h1 {
+            margin: 0 0 20px;
+            color: var(--white);
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: .9;
+            letter-spacing: -.065em;
+        }
+
+        .coach-hero h1 span {
+            color: var(--lime);
+        }
+
+        .coach-hero p {
+            max-width: 700px;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .coach-form-card,
+        #aiCoachResult {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-xl);
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012)),
+                rgba(12,15,12,.88);
+            box-shadow: 0 30px 100px rgba(0,0,0,.35);
+            backdrop-filter: blur(22px);
+        }
+
+        .coach-form-card {
+            padding: clamp(24px, 5vw, 55px);
+        }
+
+        .coach-form-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .coach-form-header h2 {
+            margin: 0;
+            color: var(--white);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+        }
+
+        .coach-form-header p {
+            max-width: 500px;
+            margin: 8px 0 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .coach-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .coach-field {
+            min-width: 0;
+        }
+
+        .coach-field-full {
+            grid-column: 1 / -1;
+        }
+
+        .coach-field label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--white);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .coach-field select {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            outline: none;
+            color: var(--white);
+            background: var(--panel);
+            font: inherit;
+            cursor: pointer;
+            transition: border-color .25s ease, box-shadow .25s ease;
+        }
+
+        .coach-field select:focus {
+            border-color: var(--lime);
+            box-shadow: 0 0 0 3px rgba(201,255,53,.1);
+        }
+
+        .coach-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .coach-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .coach-option span {
+            min-height: 54px;
+            display: grid;
+            place-items: center;
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            color: var(--muted);
+            background: var(--panel);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-align: center;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .coach-option input:checked + span {
+            border-color: var(--lime);
+            color: #050505;
+            background: var(--lime);
+            box-shadow: 0 10px 30px rgba(201,255,53,.12);
+        }
+
+        .coach-submit {
+            width: 100%;
+            min-height: 62px;
+            margin-top: 35px;
+            border: 0;
+            border-radius: var(--radius-sm);
+            color: #050505;
+            background: var(--lime);
+            font: 800 13px var(--font-mono);
+            letter-spacing: .08em;
+            cursor: pointer;
+            transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+        }
+
+        .coach-submit:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 45px rgba(201,255,53,.2);
+        }
+
+        .coach-submit:disabled {
+            opacity: .65;
+            cursor: wait;
+        }
+
+        #aiCoachError {
+            margin-top: 20px;
+        }
+
+        .nexus-coach-error {
+            padding: 20px;
+            border: 1px solid rgba(255,77,90,.35);
+            border-radius: var(--radius-md);
+            color: #ffb6bc;
+            background: rgba(255,77,90,.07);
+        }
+
+        .nexus-coach-error strong {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--red);
+        }
+
+        .nexus-coach-error ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        #aiCoachResult {
+            margin-top: 35px;
+            padding: clamp(24px, 5vw, 50px);
+        }
+
+        .coach-result-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: flex-end;
+            margin-bottom: 35px;
+        }
+
+        .coach-result-head h2 {
+            margin: 8px 0;
+            color: var(--white);
+            font-size: clamp(2rem, 5vw, 4rem);
+            letter-spacing: -.04em;
+        }
+
+        .coach-result-head p {
+            max-width: 700px;
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .eyebrow {
+            color: var(--lime);
+            font: 11px var(--font-mono);
+            letter-spacing: .12em;
+        }
+
+        .coach-result-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            min-height: 48px;
+            padding: 0 18px;
+            border-radius: var(--radius-sm);
+            font: 700 11px var(--font-mono);
+            letter-spacing: .08em;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            border: 1px solid var(--lime);
+            color: #050505;
+            background: var(--lime);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--line-light);
+            color: var(--white);
+            background: transparent;
+        }
+
+        .btn.is-saved {
+            background: #a9dd25;
+        }
+
+        .coach-profile-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .coach-stat {
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            background: rgba(255,255,255,.025);
+        }
+
+        .coach-stat span {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font: 10px var(--font-mono);
+            letter-spacing: .12em;
+        }
+
+        .coach-stat strong {
+            color: var(--white);
+        }
+
+        .coach-week {
+            display: grid;
+            gap: 16px;
+        }
+
+        .coach-day {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: rgba(255,255,255,.018);
+        }
+
+        .coach-day-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 22px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .coach-day-header span:first-child {
+            color: var(--lime);
+            font: 10px var(--font-mono);
+            letter-spacing: .12em;
+        }
+
+        .coach-day-header h3 {
+            margin: 5px 0 0;
+            color: var(--white);
+            font-size: 1.35rem;
+        }
+
+        .coach-focus {
+            align-self: center;
+            color: var(--muted);
+            font: 10px var(--font-mono);
+            text-transform: uppercase;
+        }
+
+        .coach-exercises {
+            display: grid;
+        }
+
+        .coach-exercise {
+            display: grid;
+            grid-template-columns: 55px 1fr auto;
+            gap: 18px;
+            align-items: center;
+            padding: 17px 22px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .coach-exercise:last-child {
+            border-bottom: 0;
+        }
+
+        .coach-exercise-number {
+            color: var(--muted-dark);
+            font: 11px var(--font-mono);
+        }
+
+        .coach-exercise-main strong,
+        .coach-exercise-main span {
+            display: block;
+        }
+
+        .coach-exercise-main strong {
+            color: var(--white);
+        }
+
+        .coach-exercise-main span {
+            margin-top: 4px;
+            color: var(--muted);
+            font: 10px var(--font-mono);
+            text-transform: uppercase;
+        }
+
+        .coach-exercise-meta {
+            text-align: right;
+        }
+
+        .coach-exercise-meta b,
+        .coach-exercise-meta span {
+            display: block;
+        }
+
+        .coach-exercise-meta b {
+            color: var(--lime);
+        }
+
+        .coach-exercise-meta span {
+            margin-top: 4px;
+            color: var(--muted);
+            font: 10px var(--font-mono);
+        }
+
+        .coach-guidance-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .coach-guidance {
+            padding: 25px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            background: rgba(255,255,255,.018);
+        }
+
+        .coach-guidance-wide {
+            grid-column: 1 / -1;
+        }
+
+        .coach-guidance ul {
+            margin: 15px 0 0;
+            padding-left: 20px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .coach-guidance p {
+            margin: 15px 0 0;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .coach-disclaimer {
+            margin: 25px 0 0;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+            color: var(--muted-dark);
+            font-size: .8rem;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 800px) {
+            .coach-grid,
+            .coach-guidance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .coach-field-full,
+            .coach-guidance-wide {
+                grid-column: auto;
+            }
+
+            .coach-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .coach-profile-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .coach-result-head,
+            .coach-day-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .coach-shell {
+                width: min(calc(100% - 24px), var(--container));
+                padding-top: 110px;
+            }
+
+            .coach-form-card,
+            #aiCoachResult {
+                padding: 20px;
+            }
+
+            .coach-profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .coach-exercise {
+                grid-template-columns: 32px 1fr;
+            }
+
+            .coach-exercise-meta {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .coach-options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+            }
+
+            .coach-form-card,
+            .coach-hero,
+            .coach-result-actions {
+                display: none !important;
+            }
+
+            #aiCoachResult {
+                margin: 0;
+                border: 0;
+                box-shadow: none;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body class="coach-page">
+
+    <main class="coach-shell">
+
+        <header class="coach-hero">
+            <span class="eyebrow">NEXUS / PERFORMANCE INTELLIGENCE</span>
+
+            <h1>
+                BUILD YOUR<br>
+                <span>PROTOCOL.</span>
+            </h1>
+
+            <p>
+                Configure your training profile and NEXUS will build a
+                structured weekly training protocol around your goal,
+                experience, schedule and available equipment.
+            </p>
+        </header>
+
+        <section class="coach-form-card" aria-labelledby="coach-title">
+
+            <div class="coach-form-header">
+                <div>
+                    <span class="eyebrow">01 / ATHLETE PROFILE</span>
+                    <h2 id="coach-title">Tell NEXUS how you train.</h2>
+                </div>
+
+                <p>
+                    Your selections directly influence exercise selection,
+                    training volume, rep ranges and recovery guidance.
+                </p>
+            </div>
+
+            <form id="aiCoachForm" novalidate>
+
+                <div class="coach-grid">
+
+                    <div class="coach-field">
+                        <label for="coach-goal">Primary goal</label>
+
+                        <select id="coach-goal" name="goal" required>
+                            <option value="">Select goal</option>
+                            <option value="muscle">Muscle Gain</option>
+                            <option value="strength">Strength</option>
+                            <option value="fatloss">Fat Loss</option>
+                            <option value="fitness">General Fitness</option>
+                        </select>
+                    </div>
+
+                    <div class="coach-field">
+                        <label for="coach-level">Experience</label>
+
+                        <select id="coach-level" name="level" required>
+                            <option value="">Select level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+
+                    <div class="coach-field">
+                        <label for="coach-days">Training days / week</label>
+
+                        <select id="coach-days" name="days" required>
+                            <option value="">Select frequency</option>
+                            <option value="2">2 days</option>
+                            <option value="3">3 days</option>
+                            <option value="4">4 days</option>
+                            <option value="5">5 days</option>
+                            <option value="6">6 days</option>
+                        </select>
+                    </div>
+
+                    <div class="coach-field">
+                        <label for="coach-duration">Session duration</label>
+
+                        <select id="coach-duration" name="duration" required>
+                            <option value="">Select duration</option>
+                            <option value="30">30 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60">60 minutes</option>
+                            <option value="75">75 minutes</option>
+                        </select>
+                    </div>
+
+                    <div class="coach-field coach-field-full">
+                        <label>Available equipment</label>
+
+                        <div class="coach-options">
+
+                            <label class="coach-option">
+                                <input
+                                    type="checkbox"
+                                    name="equipment"
+                                    value="gym"
+                                >
+                                <span>FULL GYM</span>
+                            </label>
+
+                            <label class="coach-option">
+                                <input
+                                    type="checkbox"
+                                    name="equipment"
+                                    value="dumbbell"
+                                >
+                                <span>DUMBBELLS</span>
+                            </label>
+
+                            <label class="coach-option">
+                                <input
+                                    type="checkbox"
+                                    name="equipment"
+                                    value="home"
+                                >
+                                <span>HOME</span>
+                            </label>
+
+                            <label class="coach-option">
+                                <input
+                                    type="checkbox"
+                                    name="equipment"
+                                    value="bodyweight"
+                                >
+                                <span>BODYWEIGHT</span>
+                            </label>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="coach-submit" type="submit">
+                    GENERATE MY PROTOCOL →
+                </button>
+
+                <div id="aiCoachError" hidden></div>
+
+            </form>
+        </section>
+
+        <section
+            id="aiCoachResult"
+            hidden
+            aria-live="polite"
+            aria-label="Generated training protocol"
+        ></section>
+
+    </main>
+
+    <script src="../js/ai-coach.js" defer></script>
+
+</body>
+</html>

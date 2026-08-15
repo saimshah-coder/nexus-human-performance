@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about NEXUS and its human-performance philosophy.">
+    <meta name="theme-color" content="#050505">
+    <title>NEXUS — About</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+<style>
+    .page-shell {
+        min-height: 100vh;
+        padding: 150px 0 100px;
+    }
+
+    .page-hero {
+        max-width: 900px;
+        margin-bottom: 70px;
+    }
+
+    .page-hero h1 {
+        margin: 15px 0 22px;
+        color: var(--white);
+        font-size: clamp(3.4rem, 8vw, 7rem);
+        line-height: .9;
+        letter-spacing: -.065em;
+    }
+
+    .page-hero h1 span {
+        color: var(--lime);
+    }
+
+    .page-hero p {
+        max-width: 720px;
+        color: var(--muted);
+        line-height: 1.85;
+    }
+
+    .page-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    .page-card {
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: linear-gradient(145deg, #101310, #080a08);
+    }
+
+    .page-card.wide {
+        grid-column: 1 / -1;
+    }
+
+    .page-card h2,
+    .page-card h3 {
+        color: var(--white);
+        margin-bottom: 12px;
+        letter-spacing: -.03em;
+    }
+
+    .page-card p,
+    .page-card li {
+        color: var(--muted);
+        line-height: 1.85;
+    }
+
+    .page-card ul {
+        padding-left: 20px;
+        margin-top: 12px;
+    }
+
+    .page-stat {
+        margin-top: 18px;
+        color: var(--lime);
+        font: 10px var(--font-mono);
+        letter-spacing: .12em;
+        text-transform: uppercase;
+    }
+
+    .contact-form {
+        display: grid;
+        gap: 16px;
+        margin-top: 18px;
+    }
+
+    .contact-form label {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+        font: 9px var(--font-mono);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+        width: 100%;
+        padding: 14px;
+        outline: none;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: #090b09;
+        color: var(--white);
+    }
+
+    .contact-form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+        border-color: rgba(201,255,53,.5);
+    }
+
+    .contact-note {
+        margin-top: 14px;
+        color: var(--muted-dark);
+        font-size: 11px;
+        line-height: 1.7;
+    }
+
+    .legal-content {
+        display: grid;
+        gap: 22px;
+    }
+
+    .legal-content .page-card h2 {
+        margin-bottom: 15px;
+    }
+
+    .legal-date {
+        margin-top: 8px;
+        color: var(--muted-dark);
+        font: 10px var(--font-mono);
+        letter-spacing: .08em;
+    }
+
+    @media (max-width: 760px) {
+        .page-shell {
+            padding: 115px 0 70px;
+        }
+
+        .page-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .page-card.wide {
+            grid-column: auto;
+        }
+
+        .page-card {
+            padding: 24px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <div class="noise"></div>
+
+    <header class="site-header">
+        <nav class="navbar container">
+            <a href="../index.html" class="brand magnetic">
+                <span class="brand-symbol"><span></span></span>
+                <span>NEXUS</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="../index.html#system">SYSTEM</a>
+                <a href="../index.html#experience">EXPERIENCE</a>
+                <a href="ai-coach.html">AI COACH</a>
+                <a href="../index.html#classes">CLASSES</a>
+                <a href="../index.html#membership">MEMBERSHIP</a>
+            </div>
+
+            <div class="nav-right">
+                <a href="contact.html" class="button button-primary magnetic">CONTACT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <div class="container">
+            
+<section class="page-hero">
+    <span class="section-number">NEXUS // ABOUT</span>
+    <h1>BUILT FOR THE <span>NEXT HUMAN.</span></h1>
+    <p>
+        NEXUS is a human-performance concept built around intelligent training,
+        recovery awareness and an environment designed to help people train
+        with more intention. We combine a premium gym experience with a digital
+        performance layer that helps members understand what to do next.
+    </p>
+</section>
+
+<section class="page-grid">
+    <article class="page-card">
+        <span class="section-number">01 / MISSION</span>
+        <h2>Training should adapt to you.</h2>
+        <p>
+            Traditional programs often assume that every athlete is ready for
+            the same workload. NEXUS is designed around a different idea:
+            training should respond to your goals, schedule, performance and
+            recovery.
+        </p>
+        <div class="page-stat">ADAPTIVE BY DESIGN</div>
+    </article>
+
+    <article class="page-card">
+        <span class="section-number">02 / EXPERIENCE</span>
+        <h2>More than a room full of equipment.</h2>
+        <p>
+            From intelligent programming to focused recovery spaces, every
+            part of the NEXUS experience is designed to reduce friction and
+            keep attention on meaningful progress.
+        </p>
+        <div class="page-stat">PERFORMANCE FIRST</div>
+    </article>
+
+    <article class="page-card wide">
+        <span class="section-number">03 / NEXUS INTELLIGENCE</span>
+        <h2>A digital layer for the physical work.</h2>
+        <p>
+            Our AI Coach can generate structured training protocols from a
+            member's selected goals, training frequency, experience and
+            available equipment. The goal is not to replace coaches or
+            professionals, but to make planning more accessible and consistent.
+        </p>
+    </article>
+
+    <article class="page-card">
+        <span class="section-number">04 / VALUES</span>
+        <h2>Consistency over hype.</h2>
+        <ul>
+            <li>Progressive, measurable training</li>
+            <li>Recovery treated as part of performance</li>
+            <li>Clear guidance without unnecessary complexity</li>
+            <li>Long-term improvement over short-term extremes</li>
+        </ul>
+    </article>
+
+    <article class="page-card">
+        <span class="section-number">05 / FUTURE</span>
+        <h2>Build what comes next.</h2>
+        <p>
+            NEXUS is built around the idea that the future body is not a fixed
+            destination. It is a system shaped by the decisions you make every
+            day.
+        </p>
+        <div class="page-stat">THE FUTURE IS TRAINABLE</div>
+    </article>
+</section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>© 2030 NEXUS HUMAN PERFORMANCE LAB</span>
+            <div>
+                <a href="about.html">ABOUT</a>
+                <a href="contact.html">CONTACT</a>
+                <a href="privacy.html">PRIVACY</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
